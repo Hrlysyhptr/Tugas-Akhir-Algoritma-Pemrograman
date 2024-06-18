@@ -1,0 +1,167 @@
+//Tugas Besar ATM Herly Syahputra, pin = 123456
+
+#include <stdio.h> //Library bahasa C
+#include <stdlib.h> //Library fungsi clear display
+
+void cek_saldo(float saldo) { //Fungsi menjalankan cek saldo
+    system("cls"); //Fungsi clear display
+    printf("Saldo Anda: Rp. %.2f\n", saldo); //Print saldo yang tersisa
+    printf("\nTekan 0 untuk kembali ke menu transaksi: "); //Print untuk fitur kembali
+    int kembali; //Fungsi untuk kembali ke menu transaksi
+    while (1) { //Mengulang terus sampai ada input angka 0
+        scanf("%d", &kembali); //Scan kembali
+        if(kembali == 0){ //If jika nilai = 0 maka kembali ke menu transaksi
+            system("cls"); //Fungsi clear display
+            return; //Kembali ke menu transaksi
+        }else{
+        	system("cls"); //Fungsi clear display
+        	printf("Saldo Anda: Rp. %.2f\n", saldo); //Print saldo tersisa
+        	printf("\nInput tidak valid. Tekan 0 untuk kembali ke menu transaksi: "); //Print input tidak valid
+        }
+    }
+}
+float setor_tunai(float saldo){ //Fungsi menjalankan setor tunai
+    system("cls"); //Fungsi clear display
+    float setor; //variabel float setor
+    printf("Masukkan jumlah setor tunai: "); //Print jumlah setoran
+    scanf("%f", &setor); //Scan setor
+    saldo += setor; //Rumus setor tunai (saldo tersisa + setoran)
+    system("cls"); //Fungsi clear display
+    printf("Setor tunai Anda berhasil\nSaldo Anda: Rp. %.2f\n", saldo); //Print saldo yang tersisa
+    printf("\nTekan 0 untuk kembali ke menu transaksi: "); //Print untuk fitur kembali
+    int kembali; //Fungsi untuk kembali ke menu transaksi
+    while(1){ //Mengulang terus sampai ada input angka 0
+        scanf("%d", &kembali); //Scan kembali
+        if (kembali == 0) { //If jika nilai = 0 maka kembali ke menu transaksi
+            system("cls"); //Fungsi clear display
+            return saldo; //Kembali ke menu transaksi
+        }else{
+        	system("cls"); //Fungsi clear display
+        	printf("Saldo Anda: Rp. %.2f\n", saldo); //Print saldo tersisa
+            printf("\nInput tidak valid. Tekan 0 untuk kembali ke menu transaksi: "); //Print input tidak valid
+        }
+    }
+}
+float tarik_tunai(float saldo){ //Fungsi menjalankan tarik tunai
+    system("cls"); //Fungsi clear display
+    float tarik; //Variabel float tarik
+    printf("Masukkan jumlah tarik tunai: "); //Print jumlah tarikan
+    scanf("%f", &tarik); //Scan tarik
+    if(tarik <= saldo){ //If untuk membatasi jumlah tarik tunai tidak melebih saldo
+        saldo -= tarik; //Rumus tarik tunai (saldo - tarikan)
+        system("cls"); //Fungsi clear display
+        printf("Tarik tunai Anda berhasil\nSaldo Anda: Rp. %.2f\n", saldo); //Print saldo yang tersisa
+    }else{
+        system("cls"); //Fungsi clear display
+        printf("Saldo Anda tidak cukup\n"); //Print saldo tidak cukup
+    }
+    printf("\nTekan 0 untuk kembali ke menu transaksi: "); //Print untuk fitur kembali
+    int kembali; //Fungsi untuk kembali ke menu transaksi
+    while(1){ //Mengulang terus sampai ada input angka 0
+        scanf("%d", &kembali); //Scan kembali
+        if (kembali == 0){ //If jika nilai = 0 maka kembali ke menu transaksi
+            system("cls"); //Fungsi clear display
+            return saldo; //Kembali ke menu transaksi
+        }else{
+        	system("cls"); //Fungsi clear display
+        	printf("Saldo Anda: Rp. %.2f\n", saldo); //Print saldo tersisa
+            printf("\nInput tidak valid. Tekan 0 untuk kembali ke menu transaksi: "); //Print input tidak valid
+        }
+    }
+}
+
+float transfer(float saldo){ //Fungsi untuk menjalankan transfer
+	system("cls"); //Fungsi clear display
+	char norek[20]; //Variabel karakter untuk nomor rekening
+	float transfer; //Variabel float transfer
+	printf("Masukkan nomor rekening tujuan: "); //Print nomor rekening tujuan
+	scanf("%s", &norek); //Scan nomor rekening tujuan
+	system("cls"); //Fungsi clear display
+	printf("Masukkan nominal: "); //Print nominal transfer
+	scanf("%f", &transfer); //Scan nominal transfer
+	if(transfer <= saldo){ //If untuk membatasi jumlah transfer tidak melebihi saldo
+		saldo -= transfer; //Rumus transfer (saldo - transfer)
+		system("cls"); //Fungsi clear display
+		printf("Transfer tunai Anda ke nomor rekening %s berhasil\n", norek); //Print nomor rekening tujuan
+		printf("Saldo Anda: Rp. %.2f\n", saldo); //Print saldo tersisa
+	}else{
+		system("cls"); //Fungsi clear display
+		printf("Saldo Anda tidak cukup\n"); //Print saldo tidak cukup
+	}
+	printf("\nTekan 0 untuk kembali ke menu transaksi: "); //Print untuk fitur kembali
+	int kembali; //Varibel integer kembali
+	while(1){ //Mengulang terus sampai ada input angka 0
+		scanf("%d", &kembali); //Scan kembali
+		if (kembali == 0){ //If jika nilai = 0 maka kembali ke menu transaksi
+			system("cls"); //Fungsi clear display
+			return saldo; //Kembali ke menu transaksi
+		}else{
+			system("cls"); //Fungsi clear display
+			printf("Saldo Anda: Rp. %.2f\n", saldo); //Print saldo tersisa
+			printf("\nInput tidak valid. Tekan 0 untuk kembali ke menu transaksi: "); //Print input tidak valid
+		}
+	}
+}
+
+
+void transaksi(float *saldo){ //Fungsi transaksi
+    int pilih; //Variabel integer pilih
+    do{
+        printf("WELCOME TO BRI MOBILE\n\nPILIH MENU TRANSAKSI\n\n1. Cek Saldo\n2. Setor Tunai\n3. Tarik Tunai\n4. Transfer\n5. Keluar\n\n"); //Print home tampilan
+        printf("Pilih: "); //Print pilih
+        
+        while(scanf("%d", &pilih) != 1 || pilih < 1 || pilih > 5) { //Mengulang antara angka 1-5
+        	system("cls"); //Fungsi clear display
+        	printf("SELAMAT DATANG DI BANK BRI\n\nPILIH MENU TRANSAKSI\n\n1. Cek Saldo\n2. Setor Tunai\n3. Tarik Tunai\n4. Transfer\n5. Keluar\n\n"); //Print home tampilan jika salah input
+            printf("Pilihan tidak valid.\nPilih: "); //Print jika angka tidak valid
+            while (getchar() != '\n'); //Menghindari agar tidak error
+        }
+        switch (pilih){ //Memilih antara 1-5
+            case 1:
+                cek_saldo(*saldo); //Pilih 1 = cek saldo
+                break;
+            case 2:
+                *saldo = setor_tunai(*saldo); //Pilih 2 = setor tunai
+                break;
+            case 3:
+                *saldo = tarik_tunai(*saldo); //Pilih 3 = tarik tunai
+                break;
+            case 4:
+            	*saldo = transfer(*saldo); //Pilih 4 = transfer
+            	break;
+            case 5: //Keluar jika memilih 5
+            	system("cls"); //Fungsi clear display
+                printf("Terima kasih telah menggunakan layanan BRI.\n"); //Print tampilan keluar
+                break;
+            default: //Jika selain angka 1-5
+                printf("Pilihan tidak tersedia.\n"); //Print jika input tidak valid
+        }
+    }while(pilih != 5); //Ulangi sampai nilai tidak sama dengan 5
+}
+int main(){ //Fungsi main
+    int pin1 = 123456; //Varibel integer pin sebenarnya
+    int pin2; //Variabel integer pin pembanding
+    int step = 0; //Varibel integer step dimulai hitungan 0
+    float saldo = 0.0; //Variabel float saldo awal
+    printf("BRI Mobile\n\nPIN: "); //print tampilan awal
+    scanf("%i", &pin2); //Scan pin pembanding
+    system("cls"); //Fungsi clear display
+    if(pin2 == pin1){ //If jika pin pembanding apakah sama dengan pin sebenarnya
+        transaksi(&saldo); //Fungsi transaksi
+    }else{
+        while(step < 2){ //mengulang sampai 3 kali salah = blokir
+            printf("BRI Mobile\n\nPIN Anda salah. Silakan coba lagi.\nPIN: "); //Print input tidak valid
+            scanf("%i", &pin2); //Scan pin pembanding
+            system("cls"); //Fungsi clear display
+            if(pin2 == pin1){ //If jika pin pembanding apakah sama dengan pin sebenarnya
+                transaksi(&saldo); //Fungsi transaksi
+                return 0; //Kembali
+            }
+            step++; //Jika salah step bertambah
+        }
+        printf("Akun Anda Diblokir\n"); //Print akun terblokir
+    }
+    return 0; //Kembali
+}
+// Nama: Herly Syahputra
+// NIM: 12250510358
